@@ -78,6 +78,10 @@ application-local.yml
 application-prod.yml
 *.env
 
+# Maven installation (local to this project)
+apache-maven-*/
+setup-maven.bat
+
 # Database
 *.db
 *.sqlite
