@@ -1,5 +1,11 @@
 # Infinite Recipe Book - Backend API
 
+## 📚 Documentation Index
+
+- **[API Specification](docs/API_SPEC.md)** - Complete API endpoints and data models
+- **[Task Tracker](docs/TASK_TRACKER.md)** - Development progress and task management
+- **[Cursor Rules](docs/.cursorrules)** - Development guidelines and coding standards
+
 ## Abstract
 
 The Infinite Recipe Book is a specialized backend API designed to solve the common problem of "what should I cook?" when staring at a fridge full of ingredients. This Java-based RESTful API focuses on three core functionalities: ingredient data processing, AI-powered recipe generation, and meal planning for breakfast, lunch, and dinner.
