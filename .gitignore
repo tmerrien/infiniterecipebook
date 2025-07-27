@@ -32,8 +32,6 @@ pom.xml.next
 release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
-.mvn/timing.properties
-.mvn/wrapper/maven-wrapper.jar
 
 # Gradle
 .gradle
@@ -80,7 +78,6 @@ application-prod.yml
 
 # Maven installation (local to this project)
 apache-maven-*/
-setup-maven.bat
 
 # Database
 *.db
