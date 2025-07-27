@@ -1,0 +1,278 @@
+# Infinite Recipe Book - Cursor Rules
+
+## Project Overview
+This is a Java Spring Boot API for intelligent recipe generation based on available ingredients. The project focuses on backend development with PostgreSQL, JPA/Hibernate, and optional LLM integration.
+
+## Tech Stack Requirements
+- **Java 17+** - Use latest LTS features
+- **Spring Boot 3.x** - Modern Spring framework
+- **PostgreSQL** - Primary database
+- **JPA/Hibernate** - Object-relational mapping
+- **Maven** - Build and dependency management
+- **Lombok** - Reduce boilerplate code
+- **JUnit 5 + Mockito** - Testing framework
+- **OpenAPI 3.0** - API documentation
+
+## Code Structure & Organization
+
+### Package Structure
+```
+src/main/java/com/infiniterecipebook/
+├── controllers/     # REST API endpoints
+├── services/        # Business logic
+├── models/          # Entity classes
+├── dto/            # Data Transfer Objects
+├── repositories/   # Data access layer
+├── enums/          # Enumerations
+├── config/         # Configuration classes
+└── exceptions/     # Custom exceptions
+```
+
+### Naming Conventions
+- **Classes**: PascalCase (e.g., `RecipeController`, `IngredientService`)
+- **Methods**: camelCase (e.g., `generateRecipe`, `validateIngredients`)
+- **Variables**: camelCase (e.g., `cookingTime`, `mealType`)
+- **Constants**: UPPER_SNAKE_CASE (e.g., `MAX_COOKING_TIME`)
+- **Packages**: lowercase (e.g., `com.infiniterecipebook.controllers`)
+
+## API Development Rules
+
+### Endpoint Structure
+- Use RESTful conventions
+- Base path: `/api/v1/`
+- Follow API_SPEC.md exactly for request/response formats
+- Always return consistent JSON structure
+- Include proper HTTP status codes
+
+### Required Endpoints (from API_SPEC.md)
+1. `POST /api/v1/recipes/generate` - Main recipe generation
+2. `GET /api/v1/recipes/{id}` - Get specific recipe
+3. `GET /api/v1/ingredients/common` - Get common ingredients
+4. `POST /api/v1/ingredients/validate` - Validate ingredients
+
+### JSON Response Standards
+- Always use consistent error format from API_SPEC.md
+- Include metadata in responses (generation time, source, etc.)
+- Use proper validation annotations on DTOs
+- Ensure all responses match the documented schema
+
+## Database & Entity Rules
+
+### Entity Design
+- Use JPA annotations properly
+- Include validation annotations (@NotNull, @Size, etc.)
+- Use Lombok to reduce boilerplate
+- Follow naming conventions for database columns
+- Include proper indexes for performance
+
+### Required Entities
+1. **Ingredient** - Core ingredient data
+2. **Recipe** - Recipe information with nested objects
+3. **MealType** - Enum for BREAKFAST/LUNCH/DINNER
+4. **RecipeIngredient** - Junction table if needed
+
+### Database Rules
+- Use Flyway for migrations
+- Include proper foreign key constraints
+- Add indexes for frequently queried fields
+- Use appropriate data types (VARCHAR, INTEGER, etc.)
+
+## Business Logic Rules
+
+### Recipe Generation
+- Start with mock implementation (Task 1.12)
+- Support meal type categorization (BREAKFAST/LUNCH/DINNER)
+- Include cooking time and difficulty levels
+- Generate multi-course meals when possible
+- Prioritize common household ingredients
+
+### Ingredient Validation
+- Normalize ingredient names
+- Support quantity and unit validation
+- Provide suggestions for similar ingredients
+- Categorize ingredients (protein, vegetable, seasoning, etc.)
+
+### LLM Integration (Future)
+- Create abstract service interface
+- Implement fallback to mock data
+- Include cost monitoring
+- Handle API failures gracefully
+
+## Testing Requirements
+
+### Unit Testing
+- Test all service methods
+- Test all controller endpoints
+- Test entity validation
+- Use Mockito for mocking dependencies
+- Aim for 80%+ code coverage
+
+### Integration Testing
+- Use TestContainers for PostgreSQL
+- Test end-to-end API flows
+- Validate JSON response formats
+- Test error scenarios
+- Test database operations
+
+### Test Naming
+- Test classes: `{ClassName}Test`
+- Test methods: `should{ExpectedBehavior}_when{Condition}`
+
+## Code Quality Standards
+
+### General Rules
+- Use meaningful variable and method names
+- Add JavaDoc for public methods
+- Keep methods under 20 lines when possible
+- Use proper exception handling
+- Log important operations
+
+### Validation
+- Use Bean Validation annotations
+- Validate all input DTOs
+- Provide clear error messages
+- Handle validation errors consistently
+
+### Error Handling
+- Use custom exceptions when appropriate
+- Return consistent error responses
+- Log errors with appropriate levels
+- Don't expose internal errors to clients
+
+## Development Workflow
+
+### Task Tracking
+- Follow TASK_TRACKER.md for development phases
+- Update task status as you work
+- Complete tasks in order when possible
+- Document any blockers or decisions
+
+### Git Commit Standards
+- Use conventional commit format
+- Include task numbers in commit messages
+- Write descriptive commit messages
+- Test before committing
+
+### Code Review Checklist
+- [ ] Follows naming conventions
+- [ ] Includes proper tests
+- [ ] Matches API specification
+- [ ] Handles errors appropriately
+- [ ] Uses Lombok effectively
+- [ ] Includes proper validation
+
+## Performance Considerations
+
+### Database
+- Use appropriate indexes
+- Optimize queries
+- Use pagination for large datasets
+- Consider caching for common ingredients
+
+### API Performance
+- Keep response times under 2 seconds
+- Use async processing when appropriate
+- Implement proper error handling
+- Monitor memory usage
+
+## Security Guidelines
+
+### Input Validation
+- Validate all user inputs
+- Sanitize ingredient names
+- Prevent SQL injection through JPA
+- Use parameterized queries
+
+### API Security
+- Implement rate limiting
+- Log suspicious activities
+- Validate JSON payloads
+- Handle malformed requests gracefully
+
+## Documentation Requirements
+
+### Code Documentation
+- JavaDoc for public methods
+- README updates for new features
+- API documentation with OpenAPI
+- Update TASK_TRACKER.md as tasks complete
+
+### API Documentation
+- Follow OpenAPI 3.0 specification
+- Include example requests/responses
+- Document all error codes
+- Keep documentation in sync with code
+
+## Deployment Considerations
+
+### Railway Deployment
+- Use environment variables for configuration
+- Include proper health checks
+- Configure database connection properly
+- Set up logging for production
+
+### Environment Configuration
+- Use application.yml for configuration
+- Separate dev/prod configurations
+- Use environment variables for secrets
+- Include proper logging configuration
+
+## Common Patterns to Follow
+
+### Service Layer Pattern
+```java
+@Service
+@Transactional
+public class RecipeService {
+    // Business logic here
+}
+```
+
+### Controller Pattern
+```java
+@RestController
+@RequestMapping("/api/v1/recipes")
+@Validated
+public class RecipeController {
+    // API endpoints here
+}
+```
+
+### Repository Pattern
+```java
+@Repository
+public interface RecipeRepository extends JpaRepository<Recipe, Long> {
+    // Custom queries here
+}
+```
+
+### DTO Pattern
+```java
+@Data
+@Builder
+public class RecipeRequest {
+    // Validation annotations
+    // Request fields
+}
+```
+
+## Anti-Patterns to Avoid
+
+- Don't put business logic in controllers
+- Don't expose entities directly in API responses
+- Don't ignore validation
+- Don't use hardcoded values
+- Don't skip error handling
+- Don't forget to update task tracker
+- Don't commit without tests
+
+## Priority Rules
+
+1. **Phase 1 Tasks** - Complete in order from TASK_TRACKER.md
+2. **API Compliance** - Always match API_SPEC.md exactly
+3. **Testing** - Write tests for all new functionality
+4. **Documentation** - Keep docs updated with code changes
+5. **Performance** - Consider performance implications
+6. **Security** - Validate all inputs and handle errors
+
+Remember: This is a weekend project focused on getting a working API quickly while maintaining code quality and following best practices. 
