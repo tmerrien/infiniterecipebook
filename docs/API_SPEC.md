@@ -348,4 +348,30 @@ Validate and normalize ingredient names.
 API versioning is handled through the URL path (`/v1/`). Future versions will be available at `/v2/`, `/v3/`, etc.
 
 ## Support
-For API support and questions, please refer to the project documentation or create an issue in the repository. 
+For API support and questions, please refer to the project documentation or create an issue in the repository.
+
+## Testing Requirements
+
+### Unit Testing Standards
+- **Test Coverage**: Minimum 80% code coverage for all new code
+- **Test Naming**: `should{ExpectedBehavior}_when{Condition}` format
+- **Test Organization**: One test class per entity/service/controller
+- **Validation Testing**: Test all validation annotations and constraints
+- **Relationship Testing**: Test entity relationships and cascade operations
+
+### Integration Testing
+- **Database Tests**: Use TestContainers for PostgreSQL integration tests
+- **API Tests**: Test all endpoints with proper request/response validation
+- **End-to-End**: Test complete workflows from API to database
+
+### Test-Driven Development
+- Write tests before implementing new features
+- Use tests to validate API specifications
+- Ensure all business logic is covered by tests
+- Run tests continuously during development
+
+---
+
+**Document Version**: 1.0  
+**Created**: July 26, 2025  
+**Last Updated**: July 27, 2025 
