@@ -348,4 +348,10 @@ Validate and normalize ingredient names.
 API versioning is handled through the URL path (`/v1/`). Future versions will be available at `/v2/`, `/v3/`, etc.
 
 ## Support
-For API support and questions, please refer to the project documentation or create an issue in the repository. 
+For API support and questions, please refer to the project documentation or create an issue in the repository.
+
+---
+
+**Document Version**: 1.0  
+**Created**: July 26, 2025  
+**Last Updated**: July 26, 2025 
